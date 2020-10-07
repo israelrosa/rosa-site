@@ -409,18 +409,24 @@ export const PortfolioImg = styled.div`
 export const PortfolioOptions = styled.ul`
   display: flex;
   list-style: none;
+  flex-direction: column;
   flex: 1;
+  justify-content: center;
+  overflow-y: scroll;
   align-items: center;
+  margin: 30px 0px;
   padding: 0px 50px 0px 0px;
   min-width: 50%;
 
   li {
     display: flex;
-    cursor: pointer;
     flex: 1;
+    cursor: pointer;
+
     flex-direction: column;
+    margin: 5px 0px;
     max-width: 600px;
-    min-height: 150px;
+    max-height: 150px;
     border-radius: 10px;
     justify-content: center;
     background: #FDFDFD;

@@ -19,7 +19,6 @@ interface PortfolioData {
 
 interface Portfolio {
   frontmatter: PortfolioData;
-
 }
 
 const Index: React.FC = () => {
@@ -29,14 +28,14 @@ const Index: React.FC = () => {
 
   const query = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark (sort: {fields: frontmatter___title, order: ASC}) {
         nodes {
           frontmatter {
             title
             description
             thumbnail {
               childImageSharp {
-                fluid(maxWidth: 500, maxHeight: 500) {
+                fluid {
                   ...GatsbyImageSharpFluid
                 }
               }
@@ -119,7 +118,6 @@ const Index: React.FC = () => {
     if(data) {
       setPortfolioData(data);
     }
-    console.log(data);
   }, []);
 
   const portfolio: Portfolio[] = query.allMarkdownRemark.nodes;
