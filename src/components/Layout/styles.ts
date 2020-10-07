@@ -18,7 +18,7 @@ export const Logo = styled.div`
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  width: 250px;
+  width: 220px;
   height: fit-content;
   left: 50px;
   top: 30px;

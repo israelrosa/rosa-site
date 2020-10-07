@@ -45,7 +45,7 @@ const Layout: React.FC = ({children}) => {
         <Logo>
           <Img fixed={logo.childImageSharp.fixed}/>
           <section/>
-          <strong>ISRAEL PIRES ROSA</strong>
+          <strong>ISRAEL ROSA</strong>
         </Logo>
         <Main>
         { children }

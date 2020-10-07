@@ -15,9 +15,21 @@ export const ImageMan = styled.div`
   justify-content: center;
   align-items: flex-end;
   z-index: 1;
+
+  >div {
+    @keyframes AnimationMan {
+      from {
+        transform: translateX(10%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+    animation: AnimationMan 20s;
+  }
 `;
 
-export const WhiteBlockEffect = styled.div`
+export const WhiteBlockEffect = styled.section`
   display: flex;
   position: absolute;
   top: 0;
@@ -51,7 +63,7 @@ export const WhiteDivision = styled.div`
     }
 
     h1 + h1 {
-      @keyframes AnimationH1 {
+      @keyframes AnimationDesign {
         from {
           margin-top: -109px;
         }
@@ -59,7 +71,7 @@ export const WhiteDivision = styled.div`
           margin-top: -50px;
         }
       }
-      animation: AnimationH1 2s ease-in-out;
+      animation: AnimationDesign 2s ease-in-out;
       margin-top: -50px;
       color: rgba(0,0,0,0);
       -webkit-text-stroke-width: 0.01px;
@@ -151,7 +163,7 @@ export const AboutLeftDivision = styled.div`
         transform: translateX(0);
       }
     }
-    animation: AnimationText 2s;
+    animation: AnimationText 4s;
     display: flex;
     flex-direction: column;
     padding: 0px 50px;
@@ -189,6 +201,7 @@ export const AboutLeftDivision = styled.div`
           opacity: 100;
         }
       }
+      animation: AnimationP 4s;
       text-align: justify;
       line-height: 153.19%;
       max-width: 500px;
@@ -269,7 +282,7 @@ export const AboutSymbols = styled.section`
       opacity: 100;
     }
   }
-  animation: AnimationSymbols 2s;
+  animation: AnimationSymbols 4s;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -290,7 +303,7 @@ export const AboutDivisionSymbols = styled.div`
   }
   display: flex;
   flex: 1;
-  animation: AnimationDiv 2s;
+  animation: AnimationDiv 4s;
   z-index: 2;
 
 
@@ -321,4 +334,96 @@ export const AboutDivisionSymbols = styled.div`
       }
   }
 
-`
+`;
+
+export const Services = styled.div`
+  display: flex;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+`;
+
+export const ServicesContent = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  >div {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 50%;
+    justify-content: center;
+    align-items: center;
+
+    >div {
+      max-width: 500px;
+      padding: 0px 50px 0px 70px;
+
+      h1 {
+        margin-bottom: 15px;
+        position: relative;
+
+        strong {
+          position: relative;
+
+          ::after {
+            content: '';
+            position: absolute;
+            height: 15px;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            mix-blend-mode: multiply;
+            background: var(--secundary-color);
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const Portfolio = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+`;
+
+export const PortfolioImg = styled.div`
+  display: flex;
+  flex: 1;
+  min-width: 50%;
+`;
+
+export const PortfolioOptions = styled.ul`
+  display: flex;
+  list-style: none;
+  flex: 1;
+  align-items: center;
+  padding: 0px 50px 0px 0px;
+  min-width: 50%;
+
+  li {
+    display: flex;
+    cursor: pointer;
+    flex: 1;
+    flex-direction: column;
+    max-width: 600px;
+    min-height: 150px;
+    border-radius: 10px;
+    justify-content: center;
+    background: #FDFDFD;
+    padding: 30px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h2 {
+        margin-bottom: 15px;
+      }
+    }
+  }
+`;

@@ -37,6 +37,20 @@ module.exports = {
         path: path.join(__dirname, `src`, `images`),
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.join(__dirname, `src`, `images`, `uploads`),
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/portfolio`,
+        name: `portfolio`,
+      },
+    },
     `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-page-creator`,
@@ -58,6 +72,31 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-exclude',
       options: { paths: [`/pages/**.ts]`]},
-    }
+    },
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-relative-images`,
+            options: {
+              // [Optional] The root of "media_folder" in your config.yml
+              // Defaults to "static"
+              staticFolderName: `/src/images/uploads`,
+              // [Optional] Include the following fields, use dot notation for nested fields
+              // All fields are included by default
+              include: ['thumbnail'],
+              // [Optional] Exclude the following fields, use dot notation for nested fields
+              // No fields are excluded by default
+            },
+          },
+          {
+            resolve: `gatsby-remark-images`,
+          },
+        ]
+      }
+    },
   ],
 }
