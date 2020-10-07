@@ -392,7 +392,18 @@ export const Portfolio = styled.div`
 export const PortfolioImg = styled.div`
   display: flex;
   flex: 1;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
   min-width: 50%;
+
+  >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    max-height: 500px;
+  }
 `;
 
 export const PortfolioOptions = styled.ul`

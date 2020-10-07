@@ -36,7 +36,7 @@ const Index: React.FC = () => {
             description
             thumbnail {
               childImageSharp {
-                fluid(maxWidth: 600) {
+                fluid(maxWidth: 500, maxHeight: 500) {
                   ...GatsbyImageSharpFluid
                 }
               }
@@ -330,7 +330,7 @@ const Index: React.FC = () => {
               <PortfolioImg>
                 { portfolioData != undefined &&
                   <>
-                    <Img fluid={portfolioData?.frontmatter?.thumbnail?.childImageSharp.fluid} style={{minWidth: "600px"}}/>
+                    <Img fluid={portfolioData?.frontmatter?.thumbnail?.childImageSharp.fluid}/>
                   </>
                 }
               </PortfolioImg>

@@ -27,10 +27,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontmatter: Frontmatter
     }
 
-    type Frontmatter {
+    type Frontmatter @infer{
       title: String
       description: String
-      thumbnail: File
+      thumbnail: File @link(by: "relativePath")
     }
   `)
 }
