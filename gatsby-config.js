@@ -67,7 +67,9 @@ module.exports = {
       options: { paths: [`/pages/**.ts]`]},
     },
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
