@@ -32,7 +32,16 @@ export const Logo = styled.div`
   }
 
   > strong {
-    font-size: 14px;
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 800px) {
+    > section {
+      display: none;
+    }
+    > strong {
+      display: none;
+    }
   }
 `;
 
@@ -53,5 +62,9 @@ export const SocialMedia = styled.ul`
     p {
       display: flex;
     }
+  }
+
+  @media (max-width: 800px) {
+    display: none;
   }
 `

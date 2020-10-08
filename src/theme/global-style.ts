@@ -2,31 +2,39 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
+    font-size: 60%;
     margin: 0;
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
+    @media(max-width: 800px) {
+      font-size: 50%;
+    }
   }
 
   body {
     font-family: 'Raleway', sans-serif;
-    font-size: 14;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     color: var(--primary-color);
   }
 
   h1 {
-    font-size: 36;
+    font-size: 3.7rem;
   }
 
   h2 {
-    font-size: 26;
+    font-size: 2.5rem;
   }
 
-  p, span {
+  p, span, a {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1.4rem;
+  }
+
+  strong, button {
+    font-size: 1.4rem;
   }
 
   button {

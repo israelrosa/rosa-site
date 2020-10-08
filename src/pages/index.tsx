@@ -258,7 +258,7 @@ const Index: React.FC = () => {
                 {serviceIndex === 1 &&
                   <>
                     <div>
-                      <img src={webDesign} alt="Web Design" style={{height: "650px"}}/>
+                      <img src={webDesign} alt="Web Design" style={{maxHeight: "600px"}}/>
                     </div>
                     <div>
                       <div>
@@ -283,14 +283,14 @@ const Index: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <img src={graphicDesign} alt="Graphic Design"/>
+                      <img src={graphicDesign} alt="Graphic Design" style={{ maxHeight: "600px"}} />
                     </div>
                   </>
                 }
                 {serviceIndex === 3 &&
                   <>
                     <div>
-                      <img src={programmer} alt="Programmer" style={{height: "500px"}}/>
+                      <img src={programmer} alt="Programmer" style={{ maxHeight: "500px"}}/>
                     </div>
                     <div>
                       <div>
@@ -313,7 +313,7 @@ const Index: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <img src={socialMedia} alt="Social Media" style={{height: "600px"}}/>
+                      <img src={socialMedia} alt="Social Media" style={{maxHeight: "600px"}}/>
                     </div>
                   </>
                 }

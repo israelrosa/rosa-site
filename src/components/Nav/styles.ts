@@ -11,6 +11,28 @@ export const Container = styled.div`
   height: 100vh;
   right: 25px;
   z-index: 4;
+
+  @media(max-width: 800px) {
+    height: 40px;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    bottom: 0;
+    background: white;
+
+    >ul {
+      flex-direction: row;
+      flex: 1;
+      padding: 0px 50px;
+      height: fit-content;
+
+
+      li {
+        writing-mode: initial;
+      }
+    }
+  }
 `;
 
 export const NavList = styled.ul<Props>`
@@ -24,7 +46,7 @@ export const NavList = styled.ul<Props>`
   > li {
     display: flex;
     writing-mode: vertical-rl;
-    font-size: 14px;
+    font-size: 1.4rem;
 
     a {
       text-decoration: none;

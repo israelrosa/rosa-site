@@ -9,7 +9,7 @@ const Layout: React.FC = ({children}) => {
     query {
       logo: file(relativePath: { eq: "logo.png" }) {
         childImageSharp {
-          fixed(width: 44, height: 50) {
+          fixed(width: 35, height: 40) {
             ...GatsbyImageSharpFixed
           }
         }

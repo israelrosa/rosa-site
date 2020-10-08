@@ -59,7 +59,7 @@ export const WhiteDivision = styled.div`
 
     h1 {
       font-family: "Anton";
-      font-size: 72px;
+      font-size: 7.2rem;
     }
 
     h1 + h1 {
@@ -102,7 +102,7 @@ export const BlackDivision = styled.div`
       flex-wrap: wrap;
       font-family: "Anton";
       color: white;
-      font-size: 72px;
+      font-size: 7.2rem;
       mix-blend-mode: difference;
       z-index: 4;
     }
@@ -143,16 +143,16 @@ export const About = styled.div`
 
   > div {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 `;
 
 export const AboutLeftDivision = styled.div`
   flex: 1;
   min-width: 50%;
-  height: 100vh;
+  min-height: 100vh;
   scroll-snap-align: start;
+  align-items: center;
+  justify-content: center;
 
   div {
     @keyframes AnimationText {
@@ -211,6 +211,8 @@ export const AboutLeftDivision = styled.div`
       }
     }
   }
+  @media (max-width: 800px) {
+  }
 `;
 
 export const AboutRightDivision = styled.div`
@@ -220,6 +222,8 @@ export const AboutRightDivision = styled.div`
   height: 100vh;
   overflow: hidden;
   scroll-snap-align: start;
+  align-items: center;
+  justify-content: center;
 
   >div {
     display: flex;
@@ -231,7 +235,7 @@ export const AboutRightDivision = styled.div`
     flex-direction: column;
     flex: 1;
     max-width: 700px;
-    padding: 0px 70px 0px 50px;
+    padding: 0px 50px 0px 50px;
     list-style: none;
     align-items: center;
 
@@ -266,9 +270,12 @@ export const AboutRightDivision = styled.div`
       }
     }
     animation: AnimationImg 4s;
-    display: flex;
     position: absolute;
     right: -350px;
+  }
+
+  @media(max-width: 800px) {
+    min-width: fit-content;
   }
 `;
 
@@ -287,9 +294,12 @@ export const AboutSymbols = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90px;
+  width: 35px;
+  margin-right: 30px;
 
-
+  @media (max-width: 800px) {
+      display: none;
+  }
 `;
 
 export const AboutDivisionSymbols = styled.div`
@@ -316,10 +326,14 @@ export const AboutDivisionSymbols = styled.div`
     backdrop-filter: blur(10px);
     padding: 0px 30px;
     align-items: center;
-    height: 150px;
+    min-height: 150px;
     border-radius: 10px;
     z-index: 2;
     transition: box-shadow 1s;
+
+    @media (max-width: 800px) {
+      min-height: 110px;
+    }
 
     :hover {
         box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.15);
@@ -340,31 +354,43 @@ export const Services = styled.div`
   display: flex;
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const ServicesContent = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  justify-content: center;
+  align-items: center;
 
   >div {
     display: flex;
-    flex: 1;
     flex-direction: column;
+    height: fit-content;
     min-width: 50%;
+    width: 100%;
     justify-content: center;
     align-items: center;
 
+    > img {
+      display: flex;
+      height: 100%;
+      z-index: 1;
+    }
+
     >div {
       max-width: 500px;
+      height: fit-content;
       padding: 0px 50px 0px 70px;
+      z-index: 3;
 
       h1 {
         margin-bottom: 15px;
         position: relative;
 
         strong {
+          font-size: 3.6rem;
           position: relative;
 
           ::after {
@@ -379,6 +405,14 @@ export const ServicesContent = styled.div`
           }
         }
       }
+    }
+  }
+  @media(max-width: 800px) {
+    flex-direction: column;
+    padding: 80px 0px;
+
+    div {
+      height: 50vh;
     }
   }
 `;

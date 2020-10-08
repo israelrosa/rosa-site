@@ -21,7 +21,6 @@ const Nav: React.FC<Props> = ({index, setIndex}) => {
         <li><a onClick={() => handleChangePage(2)}>Sobre Mim</a></li>
         <li><a onClick={() => handleChangePage(3)}>Serviços</a></li>
         <li><a onClick={() => handleChangePage(4)}>Portfólio</a></li>
-        <li><a onClick={() => handleChangePage(5)}>Blog</a></li>
       </NavList>
     </Container>
   );

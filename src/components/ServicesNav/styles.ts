@@ -10,6 +10,7 @@ export const Container = styled.ul<Props>`
   position: absolute;
   right: 50px;
   top: 30px;
+  z-index: 5;
 
   li {
     display: flex;
@@ -25,6 +26,7 @@ export const Container = styled.ul<Props>`
       width: 45px;
       height: 45px;
       transition: 1s;
+
     }
 
     :nth-child(${props => props.index}) {
@@ -34,11 +36,20 @@ export const Container = styled.ul<Props>`
         background: var(--secundary-color);
       }
     }
-
-
   }
 
   li + li {
     margin-left: 15px;
+  }
+
+  @media(max-width: 800px) {
+    top: 33px;
+
+    li {
+      button {
+        width: 35px;
+        height: 35px;
+      }
+    }
   }
 `;
