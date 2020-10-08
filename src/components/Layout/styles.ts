@@ -24,17 +24,18 @@ export const Logo = styled.div`
   left: 50px;
   top: 30px;
   z-index: 3;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: difference;
 
   > section {
     display: block;
     width: 50px;
     height: 2px;
-    background: var(--primary-color);
+    background: white;
   }
 
   > strong {
     font-size: 1.4rem;
+    color: white;
   }
 
   @media (max-width: 800px) {

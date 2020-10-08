@@ -87,7 +87,7 @@ export const WhiteDivision = styled.div`
       animation: AnimationDesign 2s ease-in-out;
       margin-top: -50px;
       color: rgba(0,0,0,0);
-      -webkit-text-stroke-width: 0.01px;
+      -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: var(--primary-color);
     }
   }
