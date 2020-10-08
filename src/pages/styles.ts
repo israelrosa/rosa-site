@@ -7,14 +7,28 @@ export const Container = styled.div`
   min-height: 100vh;
 `;
 
+export const Home = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+
+  scroll-snap-type: y mandatory;
+  overflow-x: hidden;
+  overflow-y: auto;
+`;
+
 export const ImageMan = styled.div`
   display: flex;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: flex-end;
+  width: fit-content;
+  bottom: 0;
+  left: 35%;
   z-index: 1;
+
+  @media (max-width: 800px) {
+    left: 45%;
+  }
 
   >div {
     @keyframes AnimationMan {
@@ -26,28 +40,27 @@ export const ImageMan = styled.div`
       }
     }
     animation: AnimationMan 20s;
-  }
-`;
 
-export const WhiteBlockEffect = styled.section`
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 50%;
-  width: 50%;
-  height: 100%;
-  background: white;
-  mix-blend-mode: difference;
-  z-index: 2;
+    >div {
+      display: flex;
+      height: 80vh;
+      width: fit-content;
+      min-width: 500px;
+    }
+  }
 `;
 
 export const WhiteDivision = styled.div`
   display: flex;
-  height: 100%;
-  width: 50%;
+  flex: 1;
+  height: 100vh;
+  min-width: 50%;
   background: white;
   align-items: center;
   padding-left: 50px;
+  z-index: 2;
+  mix-blend-mode: difference;
+  scroll-snap-align: start;
 
   >div {
     display: flex;
@@ -78,43 +91,64 @@ export const WhiteDivision = styled.div`
       -webkit-text-stroke-color: var(--primary-color);
     }
   }
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export const BlackDivision = styled.div`
   display: flex;
-  height: 100%;
-  width: 50%;
+  height: 100vh;
+  position: relative;
+  min-width: 650px;
   background: black;
-  justify-content: center;
   align-items: center;
+  padding: 0px 0px 0px 15vw;
+  flex: 1;
+  z-index: 2;
+  mix-blend-mode: exclusion;
+  scroll-snap-align: start;
+
+  @media(max-width: 1300px) {
+    padding: 0px 50px;
+  }
 
   >div {
-    transform: translate(10%);
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     height: fit-content;
-    justify-content: center;
     z-index: 3;
 
     h1 {
       display: flex;
-      flex-wrap: wrap;
       font-family: "Anton";
       color: white;
       font-size: 7.2rem;
       mix-blend-mode: difference;
       z-index: 4;
+      @media(max-width: 800px) {
+        font-size: 5.2rem;
+      }
     }
 
     span {
+      display: flex;
       color: var(--secundary-color);
       font-size: 18px;
       margin-top: -10px;
       margin-bottom: 10px;
       /* identical to box height, or 28px */
       letter-spacing: 1.6em;
+
+      @media(max-width: 800px) {
+        font-size: 1.3rem;
+        margin-top: 0px;
+        letter-spacing: 1.6rem;
+      }
     }
+  }
+  @media(max-width: 800px) {
+    min-width: 100%;
   }
 `;
 
@@ -129,6 +163,14 @@ export const Stack = styled.ul`
 
   li + li {
     margin-left: 15px;
+  }
+
+  @media(max-width: 800px) {
+    top: 32px;
+
+    li + li {
+      margin-left: 1px;
+    }
   }
 `;
 
@@ -153,6 +195,7 @@ export const AboutLeftDivision = styled.div`
   scroll-snap-align: start;
   align-items: center;
   justify-content: center;
+  background: white;
 
   div {
     @keyframes AnimationText {
@@ -224,6 +267,7 @@ export const AboutRightDivision = styled.div`
   scroll-snap-align: start;
   align-items: center;
   justify-content: center;
+  background: white;
 
   >div {
     display: flex;
@@ -355,6 +399,7 @@ export const Services = styled.div`
   position: relative;
   width: 100vw;
   min-height: 100vh;
+  background: white;
 `;
 
 export const ServicesContent = styled.div`

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
 import Img from 'gatsby-image';
-import { Container, ImageMan, WhiteBlockEffect, WhiteDivision, BlackDivision, Stack, About, AboutSymbols, AboutRightDivision, AboutLeftDivision, AboutDivisionSymbols, Services, ServicesContent, Portfolio, PortfolioImg, PortfolioOptions } from './styles';
+import { Container, ImageMan, WhiteDivision, BlackDivision, Stack, About, AboutSymbols, AboutRightDivision, AboutLeftDivision, AboutDivisionSymbols, Services, ServicesContent, Portfolio, PortfolioImg, PortfolioOptions, Home } from './styles';
 import Nav from '../components/Nav';
 import ServicesNav from '../components/ServicesNav';
 import webDesign from '../gifs/web-design.gif';
@@ -129,11 +129,10 @@ const Index: React.FC = () => {
       <Container>
         <Nav index={index} setIndex={setIndex}/>
         {index === 1 &&
-          <>
+          <Home>
             <ImageMan>
-              <WhiteBlockEffect/>
               <div>
-                <Img fluid = {man.childImageSharp.fluid} style={{display: "flex", width: man.childImageSharp.fluid.presentationWidth, height: man.childImageSharp.fluid.presentationHeight }} />
+                <Img fluid = {man.childImageSharp.fluid} draggable={false} />
               </div>
             </ImageMan>
             <WhiteDivision>
@@ -170,7 +169,7 @@ const Index: React.FC = () => {
                 </Button>
               </div>
             </BlackDivision>
-          </>
+          </Home>
         }
         {index === 2 &&
           <>

@@ -4,7 +4,7 @@ interface Props {
   index: number;
 }
 
-export const Container = styled.div`
+export const Container = styled.div<Props>`
   display: flex;
   position: fixed;
   width: fit-content;
@@ -19,7 +19,7 @@ export const Container = styled.div`
     align-items: center;
     right: 0;
     bottom: 0;
-    background: white;
+    background: ${props => props.index === 1? "transparent" : "white"};
 
     >ul {
       flex-direction: row;
@@ -50,9 +50,10 @@ export const NavList = styled.ul<Props>`
 
     a {
       text-decoration: none;
-      color: ${props => props.index === 1? "white" : "var(--primary-color)"};
+      color: ${props => props.index === 1? "var(--text-color)" : "var(--primary-color)"};
       z-index: 3;
       cursor: pointer;
+      mix-blend-mode: ${props => props.index === 1? "difference" : "none"};
 
       :hover {
         color: var(--secundary-color);

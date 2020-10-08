@@ -5,6 +5,7 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   min-height: 100vh;
+  overflow: hidden;
 `;
 
 export const Main = styled.div`
@@ -23,6 +24,7 @@ export const Logo = styled.div`
   left: 50px;
   top: 30px;
   z-index: 3;
+  mix-blend-mode: exclusion;
 
   > section {
     display: block;

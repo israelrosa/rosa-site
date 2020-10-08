@@ -15,7 +15,7 @@ const Nav: React.FC<Props> = ({index, setIndex}) => {
   }, []);
 
   return (
-    <Container>
+    <Container index={index}>
       <NavList index={index}>
         <li><a onClick={() => handleChangePage(1)}>Home</a></li>
         <li><a onClick={() => handleChangePage(2)}>Sobre Mim</a></li>
