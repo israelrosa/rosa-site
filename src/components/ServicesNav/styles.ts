@@ -8,7 +8,7 @@ export const Container = styled.ul<Props>`
   display: flex;
   list-style: none;
   position: absolute;
-  right: 50px;
+  right: var(--margin-width);
   top: 30px;
   z-index: 5;
 

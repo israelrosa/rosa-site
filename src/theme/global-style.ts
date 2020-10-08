@@ -45,5 +45,6 @@ export const GlobalStyle = createGlobalStyle`
     --primary-color: #2B2B2B;
     --secundary-color: #FF6581;
     --text-color: #8E8E8E;
+    --margin-width: 5vw;
   }
 `

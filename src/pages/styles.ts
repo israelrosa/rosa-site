@@ -57,7 +57,7 @@ export const WhiteDivision = styled.div`
   min-width: 50%;
   background: white;
   align-items: center;
-  padding-left: 50px;
+  padding-left: var(--margin-width);
   z-index: 2;
   mix-blend-mode: difference;
   scroll-snap-align: start;
@@ -110,7 +110,7 @@ export const BlackDivision = styled.div`
   scroll-snap-align: start;
 
   @media(max-width: 1300px) {
-    padding: 0px 50px;
+    padding: 0px var(--margin-width);
   }
 
   >div {
@@ -143,7 +143,7 @@ export const BlackDivision = styled.div`
       @media(max-width: 800px) {
         font-size: 1.3rem;
         margin-top: 0px;
-        letter-spacing: 1.6rem;
+        letter-spacing: 2.1rem;
       }
     }
   }
@@ -156,7 +156,7 @@ export const Stack = styled.ul`
   display: flex;
   position: absolute;
   top: 30px;
-  right: 50px;
+  right: var(--margin-width);
   width: fit-content;
   height: fit-content;
   list-style: none;
@@ -209,7 +209,7 @@ export const AboutLeftDivision = styled.div`
     animation: AnimationText 4s;
     display: flex;
     flex-direction: column;
-    padding: 0px 50px;
+    padding: 0px var(--margin-width);
 
     h1 {
       @keyframes AnimationH1 {
@@ -279,7 +279,7 @@ export const AboutRightDivision = styled.div`
     flex-direction: column;
     flex: 1;
     max-width: 700px;
-    padding: 0px 50px 0px 50px;
+    padding: 0px var(--margin-width) 0px;
     list-style: none;
     align-items: center;
 
@@ -427,7 +427,7 @@ export const ServicesContent = styled.div`
     >div {
       max-width: 500px;
       height: fit-content;
-      padding: 0px 50px 0px 70px;
+      padding: 0px var(--margin-width) 0px 70px;
       z-index: 3;
 
       h1 {
@@ -458,6 +458,9 @@ export const ServicesContent = styled.div`
 
     div {
       height: 50vh;
+      >div {
+        padding: 0px var(--margin-width);
+      }
     }
   }
 `;
@@ -471,7 +474,7 @@ export const Portfolio = styled.div`
 export const PortfolioImg = styled.div`
   display: flex;
   flex: 1;
-  padding: 50px;
+  padding: var(--margin-width);
   justify-content: center;
   align-items: center;
   min-width: 50%;

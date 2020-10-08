@@ -24,7 +24,7 @@ export const Container = styled.div<Props>`
     >ul {
       flex-direction: row;
       flex: 1;
-      padding: 0px 50px;
+      padding: 0px var(--margin-width);
       height: fit-content;
 
 

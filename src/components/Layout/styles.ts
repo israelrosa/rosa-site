@@ -21,7 +21,7 @@ export const Logo = styled.div`
   position: absolute;
   width: 220px;
   height: fit-content;
-  left: 50px;
+  left: var(--margin-width);
   top: 30px;
   z-index: 3;
   mix-blend-mode: difference;
@@ -55,7 +55,7 @@ export const SocialMedia = styled.ul`
   width: fit-content;
   align-items: center;
   bottom: 30px;
-  left: 50px;
+  left: var(--margin-width);
   z-index: 3;
 
   >li {
