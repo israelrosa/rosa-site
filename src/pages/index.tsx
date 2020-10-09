@@ -10,6 +10,7 @@ import webDesign from '../gifs/web-design.gif';
 import graphicDesign from '../gifs/graphic-design.gif';
 import programmer from '../gifs/programmer.gif';
 import socialMedia from '../gifs/social-media.gif';
+import SEO from '../components/SEO';
 
 interface PortfolioData {
     title: string;
@@ -24,7 +25,7 @@ interface Portfolio {
 const Index: React.FC = () => {
   const [index, setIndex] = useState(1);
   const [serviceIndex, setServiceIndex] = useState(1);
-  const [portfolioData, setPortfolioData] = useState({} as Portfolio);
+  const [selectedPortfolio ,setSelectedPortfolio] = useState(0);
 
   const query = useStaticQuery(graphql`
     query {
@@ -113,19 +114,20 @@ const Index: React.FC = () => {
     }
   `);
 
-  const handlePortfolioSelect = useCallback((title) => {
-    const data = portfolio.find(data => data.frontmatter.title === title);
-    if(data) {
-      setPortfolioData(data);
-    }
-  }, []);
-
   const portfolio: Portfolio[] = query.allMarkdownRemark.nodes;
+
+  const [portfolioData, setPortfolioData] = useState(portfolio[0]);
+
+  useEffect(() => {
+    let index = portfolio.findIndex(data => data.frontmatter.title === portfolioData.frontmatter.title);
+    setSelectedPortfolio(index);
+  }, [portfolioData]);
 
   const {man, nextjs, gatsby, react, node, logoBackground, design, code, music} = query;
 
   return (
     <Layout>
+      <SEO/>
       <Container>
         <Nav index={index} setIndex={setIndex}/>
         {index === 1 &&
@@ -325,16 +327,12 @@ const Index: React.FC = () => {
           <>
             <Portfolio>
               <PortfolioImg>
-                { portfolioData != undefined &&
-                  <>
-                    <Img fluid={portfolioData?.frontmatter?.thumbnail?.childImageSharp.fluid}/>
-                  </>
-                }
+                <Img fluid={portfolioData?.frontmatter?.thumbnail?.childImageSharp.fluid}/>
               </PortfolioImg>
-              <PortfolioOptions>
+              <PortfolioOptions selected={selectedPortfolio}>
                 {
                   portfolio.map(data => (
-                    <li key={data.frontmatter.title} onClick={() => handlePortfolioSelect(data.frontmatter.title)}>
+                    <li key={data.frontmatter.title} onClick={() => setPortfolioData(data)}>
                       <div>
                         <h2 >{data.frontmatter.title}</h2>
                         <p >{data.frontmatter.description}</p>

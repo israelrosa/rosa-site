@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface PortfolioProps {
+  selected: number;
+}
+
 export const Container = styled.div`
   display: flex;
   position: relative;
@@ -38,7 +42,7 @@ export const ImageMan = styled.div`
   position: absolute;
   width: fit-content;
   bottom: 0;
-  left: 35%;
+  left: 30%;
   z-index: 1;
 
   @media (max-width: 800px) {
@@ -60,7 +64,7 @@ export const ImageMan = styled.div`
       display: flex;
       height: 90vh;
       width: fit-content;
-      min-width: 500px;
+      min-width: 600px;
     }
   }
 `;
@@ -523,7 +527,7 @@ export const PortfolioImg = styled.div`
   }
 `;
 
-export const PortfolioOptions = styled.ul`
+export const PortfolioOptions = styled.ul<PortfolioProps>`
   display: flex;
   list-style: none;
   flex-direction: column;
@@ -559,6 +563,17 @@ export const PortfolioOptions = styled.ul`
     background: #FDFDFD;
     padding: 30px;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+
+    :nth-child(${props => props.selected + 1}) {
+      border: 1px solid var(--secundary-color);
+
+      div {
+        h2 {
+          color: var(--secundary-color);
+        }
+      }
+    }
+
 
     div {
       display: flex;

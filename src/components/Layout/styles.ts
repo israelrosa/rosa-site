@@ -57,13 +57,15 @@ export const SocialMedia = styled.ul`
   bottom: 30px;
   left: var(--margin-width);
   z-index: 3;
+  mix-blend-mode: difference;
 
   >li {
     display: flex;
     padding-right: 20px;
 
-    p {
+    span {
       display: flex;
+      color: white
     }
   }
 
