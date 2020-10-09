@@ -93,5 +93,18 @@ module.exports = {
         ]
       }
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Israel Rosa`,
+        short_name: `Rosa`,
+        start_url: `/`,
+        background_color: `white`,
+        theme_color: `#2B2B2B`,
+        icon: `static/icon.png`,
+        display: `standalone`,
+        theme_color_in_head: false,
+      },
+    },
   ],
 }

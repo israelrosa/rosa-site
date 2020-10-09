@@ -16,6 +16,21 @@ export const Home = styled.div`
   scroll-snap-type: y mandatory;
   overflow-x: hidden;
   overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    width: 5px;
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
 `;
 
 export const ImageMan = styled.div`
@@ -43,7 +58,7 @@ export const ImageMan = styled.div`
 
     >div {
       display: flex;
-      height: 80vh;
+      height: 90vh;
       width: fit-content;
       min-width: 500px;
     }
@@ -182,6 +197,16 @@ export const About = styled.div`
   scroll-snap-type: y mandatory;
   overflow-x: hidden;
   overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    width: 5px;
+    border-radius: 20px;
+  }
 
   > div {
     display: flex;
@@ -511,15 +536,23 @@ export const PortfolioOptions = styled.ul`
   scroll-behavior: smooth;
   align-items: center;
 
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    width: 5px;
+    border-radius: 20px;
+  }
+
   li {
     display: flex;
     flex: 1;
     cursor: pointer;
     scroll-snap-align: start;
-
     flex-direction: column;
     margin: 5px 0px;
-    max-width: 600px;
     max-height: 150px;
     border-radius: 10px;
     justify-content: center;
@@ -545,5 +578,9 @@ export const PortfolioOptions = styled.ul`
     max-height: 50vh;
     min-width: fit-content;
     padding: 20px var(--margin-width);
+
+    li {
+
+    }
   }
 `;
