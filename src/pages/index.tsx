@@ -143,7 +143,7 @@ const Index: React.FC = () => {
                 <h1>Designer</h1>
                 <h1>Designer</h1>
                 <h1>Designer</h1>
-                <Button color="var(--primary-color)">
+                <Button color="var(--primary-color)" onClick={() => {setIndex(4)}}>
                   Ver Trabalhos
                 </Button>
               </div>
@@ -166,7 +166,7 @@ const Index: React.FC = () => {
               <div>
                 <h1>Programador</h1>
                 <span>FULL STACK</span>
-                <Button color= "var(--secundary-color)">
+                <Button color= "var(--secundary-color)" onClick={() => {setIndex(4)}}>
                   Ver Trabalhos
                 </Button>
               </div>

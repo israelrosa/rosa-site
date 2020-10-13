@@ -2,13 +2,13 @@ import React, { ButtonHTMLAttributes } from 'react';
 
 import { Container } from './styles';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   color: string;
 }
 
-const Button: React.FC<Props> = ({color, children}) => {
+const Button: React.FC<Props> = ({color, children, ...rest}) => {
   return (
-    <Container color={color}>
+    <Container color={color} {...rest}>
       {children}
     </Container>
   );
