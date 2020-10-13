@@ -4,4 +4,4 @@ description: "Identidade visual feita para um aplicativo inovador, um dos meus p
 thumbnail: spayce.png
 ---
 
-<p>jfsadkfjhfjahfjajhkfhklash</p>
+jfsadkfjhfjahfjajhkfhklash
