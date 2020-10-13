@@ -67,7 +67,7 @@ const Layout: React.FC = ({children}) => {
             </a>
           </li>
           <li>
-            <span>Follow me</span>
+            <span>Siga-me</span>
           </li>
         </SocialMedia>
       </Container>
