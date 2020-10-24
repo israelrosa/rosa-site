@@ -26,6 +26,8 @@ const Index: React.FC = () => {
   const [index, setIndex] = useState(1);
   const [serviceIndex, setServiceIndex] = useState(1);
   const [selectedPortfolio ,setSelectedPortfolio] = useState(0);
+  const [serviceClientX, setServiceClientX] = useState(0);
+  const [serviceOffsetX, setServiceOffsetX] = useState(0);
 
   const query = useStaticQuery(graphql`
     query {
@@ -124,6 +126,23 @@ const Index: React.FC = () => {
   }, [portfolioData]);
 
   const {man, nextjs, gatsby, react, node, logoBackground, design, code, music} = query;
+
+  const handleServiceTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    setServiceClientX(e.targetTouches[0].clientX);
+
+  }, []);
+
+  const handleServiceTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    setServiceOffsetX(e.targetTouches[0].clientX);
+  }, [])
+
+  const handleServiceTouchEnd = useCallback(() => {
+    if(serviceOffsetX > serviceClientX) {
+      serviceIndex === 1? setServiceIndex(4) : setServiceIndex(serviceIndex - 1);
+    } else if(serviceOffsetX < serviceClientX) {
+      serviceIndex === 4? setServiceIndex(1) : setServiceIndex(serviceIndex + 1);
+    }
+  }, [serviceClientX, serviceOffsetX]);
 
   return (
     <Layout>
@@ -253,7 +272,7 @@ const Index: React.FC = () => {
         }
         {index === 3 &&
           <>
-            <Services>
+            <Services onTouchStart={(e) => handleServiceTouchStart(e)} onTouchMove={(e) => handleServiceTouchMove(e)} onTouchEnd={() => handleServiceTouchEnd()}>
               <ServicesNav index={serviceIndex} setIndex={setServiceIndex}/>
                 <ServicesContent>
                 {serviceIndex === 1 &&
