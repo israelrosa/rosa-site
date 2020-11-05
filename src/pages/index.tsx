@@ -9,7 +9,7 @@ import SEO from '../components/SEO';
 
 const Index: React.FC = () => {
   const [windowHeight, setWindowHeight] = useState(typeof window !== 'undefined' && window.innerHeight);
-  const [offsetYPos, setOffsetYPos] = useState(-165);
+  const [offsetYPos, setOffsetYPos] = useState(-135);
   const [spanIndex, setSpanIndex] = useState(1);
 
   const query = useStaticQuery(graphql`
@@ -58,9 +58,6 @@ const Index: React.FC = () => {
     setWindowHeight(typeof window !== 'undefined' && window.innerHeight);
   }, [windowHeight]);
 
-  const handleTypingSpan = useCallback((spanIndex) => {
-  }, [])
-
   typeof window !== 'undefined' && window.addEventListener('resize', handleResizeWindow);
 
   const handleMouseOver = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>)=> {
@@ -85,7 +82,7 @@ const Index: React.FC = () => {
 
       const offset = (scrollPos / height) * 100;
 
-      const result = -140 + offset;
+      const result = -135 + offset;
       setOffsetYPos(result);
     }
   }, []);
