@@ -9,7 +9,7 @@ import SEO from '../components/SEO';
 import { setTimeout } from 'timers';
 
 const Index: React.FC = () => {
-  const [windowHeight, setWindowHeight] = useState(globalThis.innerHeight);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [offsetYPos, setOffsetYPos] = useState(-165);
   const [spanIndex, setSpanIndex] = useState(1);
 
@@ -56,12 +56,12 @@ const Index: React.FC = () => {
   `);
 
   const handleResizeWindow = useCallback(() => {
-    setWindowHeight(globalThis.innerHeight);
+    setWindowHeight(window.innerHeight);
   }, [windowHeight]);
 
   const handleTypingSpan = useCallback((spanIndex) => {
   }, [])
-  globalThis.addEventListener('resize', handleResizeWindow);
+  window.addEventListener('resize', handleResizeWindow);
 
   const handleMouseOver = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>)=> {
     const yPos = e.clientY;
