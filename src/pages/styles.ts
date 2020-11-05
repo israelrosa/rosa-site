@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
-interface PortfolioProps {
-  selected: number;
+interface Props {
+  offsetYPos: number;
+}
+
+interface SpanProps {
+  index: number;
 }
 
 export const Container = styled.div`
@@ -34,6 +38,12 @@ export const Home = styled.div`
 
   ::-webkit-scrollbar-track-piece {
     background: transparent;
+  }
+
+  @media (max-width: 800px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -69,7 +79,7 @@ export const ImageMan = styled.div`
   }
 `;
 
-export const WhiteDivision = styled.div`
+export const WhiteDivision = styled.div<Props>`
   display: flex;
   flex: 1;
   height: 100vh;
@@ -84,32 +94,33 @@ export const WhiteDivision = styled.div`
   >div {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    justify-content: center;
-    z-index: 3;
+    >div {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      height: fit-content;
+      justify-content: center;
+      z-index: 3;
+      height: 300px;
 
-    h1 {
-      font-family: "Anton";
-      font-size: 7.2rem;
-    }
+      h1 {
+        font-family: "Anton";
+        font-size: 8.2rem;
 
-    h1 + h1 {
-      @keyframes AnimationDesign {
-        from {
-          margin-top: -109px;
-        }
-        to {
-          margin-top: -50px;
+        @media (max-width: 800px) {
+          font-size: 7.2rem;
         }
       }
-      animation: AnimationDesign 2s ease-in-out;
-      margin-top: -50px;
-      color: rgba(0,0,0,0);
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: var(--primary-color);
+
+      h1 + h1 {
+        margin-top: ${props => props.offsetYPos}px;
+        color: rgba(0,0,0,0);
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: var(--primary-color);
+      }
     }
   }
+
   @media (max-width: 800px) {
     width: 100%;
   }
@@ -138,7 +149,7 @@ export const BlackDivision = styled.div`
     height: fit-content;
     z-index: 3;
 
-    h1 {
+    > h1 {
       display: flex;
       font-family: "Anton";
       color: white;
@@ -149,14 +160,25 @@ export const BlackDivision = styled.div`
         font-size: 5.2rem;
       }
     }
+  }
+  @media(max-width: 800px) {
+    min-width: 100%;
+  }
+`;
 
-    span {
-      display: flex;
+export const Spans = styled.div<SpanProps>`
+  display: flex;
+
+  > span{
+      display: none;
       color: var(--secundary-color);
-      font-size: 18px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      font-size: 1.8rem;
       margin-top: -10px;
       margin-bottom: 10px;
-      /* identical to box height, or 28px */
       letter-spacing: 1.6em;
 
       @media(max-width: 800px) {
@@ -164,11 +186,36 @@ export const BlackDivision = styled.div`
         margin-top: 0px;
         letter-spacing: 2.1rem;
       }
+      @keyframes AnimationSpan {
+        from {
+          border-right: 1px solid white;
+        }
+        to {
+          border-right: transparent;
+        }
+      }
+
+      @keyframes TypingAnimation {
+        from {
+          width: 0;
+        }
+        50% {
+          width: 100%
+        }
+        70% {
+          width: 100%;
+        }
+        to {
+          width: 0;
+        }
+      }
+
+      :nth-child(${props => props.index}) {
+        display: flex;
+        animation: AnimationSpan 500ms infinite, TypingAnimation 3s steps(200) 0s normal ;
+      }
     }
-  }
-  @media(max-width: 800px) {
-    min-width: 100%;
-  }
+
 `;
 
 export const Stack = styled.ul`
@@ -189,413 +236,6 @@ export const Stack = styled.ul`
 
     li + li {
       margin-left: 1px;
-    }
-  }
-`;
-
-export const About = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-  scroll-snap-type: y mandatory;
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #cfcfcf;
-    width: 5px;
-    border-radius: 20px;
-  }
-
-  > div {
-    display: flex;
-  }
-`;
-
-export const AboutLeftDivision = styled.div`
-  flex: 1;
-  min-width: 50%;
-  min-height: 100vh;
-  scroll-snap-align: start;
-  align-items: center;
-  justify-content: center;
-  background: white;
-
-  div {
-    @keyframes AnimationText {
-      from {
-        transform: translateX(-100%);
-      }
-      to {
-        transform: translateX(0);
-      }
-    }
-    animation: AnimationText 4s;
-    display: flex;
-    flex-direction: column;
-    padding: 0px var(--margin-width);
-
-    h1 {
-      @keyframes AnimationH1 {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 100;
-        }
-      }
-      animation: AnimationH1 4s;
-      margin-bottom: 30px;
-      position: relative;
-      width: fit-content;
-
-      ::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 10px;
-        background: var(--secundary-color);
-      }
-    }
-    p {
-      @keyframes AnimationP {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 100;
-        }
-      }
-      animation: AnimationP 4s;
-      text-align: justify;
-      line-height: 153.19%;
-      max-width: 500px;
-
-      strong {
-        color: var(--secundary-color);
-      }
-    }
-  }
-  @media (max-width: 800px) {
-  }
-`;
-
-export const AboutRightDivision = styled.div`
-  flex: 1;
-  position: relative;
-  min-width: 600px;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
-  align-items: center;
-  justify-content: center;
-  background: white;
-
-  >div {
-    display: flex;
-    height: 100%;
-  }
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    max-width: 700px;
-    padding: 0px var(--margin-width) 0px;
-    list-style: none;
-    align-items: center;
-
-    li {
-      display: flex;
-      width: 100%;
-
-      h2 {
-        display: flex;
-        width: 100%;
-        font-weight: 500;
-        margin-bottom: 15px;
-        color: var(--text-color);
-      }
-
-      p {
-        color: var(--text-color);
-      }
-    }
-    li + li {
-        margin-top: 15px;
-      }
-  }
-
-  >div {
-    @keyframes AnimationImg {
-      from {
-        right: -100%;
-      }
-      to {
-        right: -350px;
-      }
-    }
-    animation: AnimationImg 4s;
-    position: absolute;
-    right: -350px;
-  }
-
-  @media(max-width: 800px) {
-    min-width: fit-content;
-  }
-`;
-
-export const AboutSymbols = styled.section`
-
-  @keyframes AnimationSymbols {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 100;
-    }
-  }
-  animation: AnimationSymbols 4s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  margin-right: 30px;
-
-  @media (max-width: 800px) {
-      display: none;
-  }
-`;
-
-export const AboutDivisionSymbols = styled.div`
-  @keyframes AnimationDiv {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 100;
-    }
-  }
-  display: flex;
-  flex: 1;
-  animation: AnimationDiv 4s;
-  z-index: 2;
-
-
-  >div {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 0px 30px;
-    align-items: center;
-    min-height: 150px;
-    border-radius: 10px;
-    z-index: 2;
-    transition: box-shadow 1s;
-
-    @media (max-width: 800px) {
-      min-height: 110px;
-    }
-
-    :hover {
-        box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.15);
-
-        h2 {
-          color: var(--secundary-color);
-        }
-
-        p {
-          color: var(--primary-color);
-        }
-      }
-  }
-
-`;
-
-export const Services = styled.div`
-  display: flex;
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  background: white;
-`;
-
-export const ServicesContent = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-
-  >div {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    min-width: 50%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-
-    > img {
-      display: flex;
-      height: 100%;
-      z-index: 1;
-    }
-
-    >div {
-      max-width: 500px;
-      height: fit-content;
-      padding: 0px var(--margin-width) 0px 70px;
-      z-index: 3;
-
-      h1 {
-        margin-bottom: 15px;
-        position: relative;
-
-        strong {
-          font-size: 3.6rem;
-          position: relative;
-
-          ::after {
-            content: '';
-            position: absolute;
-            height: 15px;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-            mix-blend-mode: multiply;
-            background: var(--secundary-color);
-          }
-        }
-      }
-    }
-  }
-  @media(max-width: 800px) {
-    flex-direction: column;
-    padding: 80px 0px;
-
-    div {
-      height: 50vh;
-      >div {
-        padding: 0px var(--margin-width);
-      }
-    }
-  }
-`;
-
-export const Portfolio = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background: white;
-`;
-
-export const PortfolioImg = styled.div`
-  display: flex;
-  flex: 1;
-  padding: var(--margin-width);
-  justify-content: center;
-  align-items: center;
-  min-width: 50vh;
-  max-height: 50vh;
-  background: white;
-  object-fit: cover;
-
-  >div {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    min-width: 30%;
-    max-width: 50vh ;
-    max-height: 100%;
-    object-fit: cover;
-  }
-`;
-
-export const PortfolioOptions = styled.ul<PortfolioProps>`
-  display: flex;
-  list-style: none;
-  flex-direction: column;
-  flex: 1;
-  max-height: 100vh;
-  overflow-y: scroll;
-  padding: 20px 70px 20px var(--margin-width);
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  align-items: center;
-
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #cfcfcf;
-    width: 5px;
-    border-radius: 20px;
-  }
-
-  li {
-    display: flex;
-    flex: 1;
-    cursor: pointer;
-    scroll-snap-align: start;
-    flex-direction: column;
-    margin: 5px 0px;
-    max-height: 150px;
-    border-radius: 10px;
-    justify-content: center;
-    background: #FDFDFD;
-    padding: 30px;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-
-    :nth-child(${props => props.selected + 1}) {
-      border: 1px solid var(--secundary-color);
-
-      div {
-        h2 {
-          color: var(--secundary-color);
-        }
-      }
-    }
-
-
-    div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      h2 {
-        margin-bottom: 15px;
-      }
-    }
-    :last-child {
-      margin-bottom: 40px;
-    }
-  }
-
-  @media(max-width: 800px) {
-    max-height: 50vh;
-    min-width: fit-content;
-    padding: 20px var(--margin-width);
-
-    li {
-
     }
   }
 `;

@@ -1,51 +1,20 @@
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, navigate } from 'gatsby';
 import React, { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
 import Img from 'gatsby-image';
-import { Container, ImageMan, WhiteDivision, BlackDivision, Stack, About, AboutSymbols, AboutRightDivision, AboutLeftDivision, AboutDivisionSymbols, Services, ServicesContent, Portfolio, PortfolioImg, PortfolioOptions, Home } from './styles';
+import { Container, ImageMan, WhiteDivision, BlackDivision, Stack, Home, Spans } from './styles';
 import Nav from '../components/Nav';
-import ServicesNav from '../components/ServicesNav';
-import webDesign from '../gifs/web-design.gif';
-import graphicDesign from '../gifs/graphic-design.gif';
-import programmer from '../gifs/programmer.gif';
-import socialMedia from '../gifs/social-media.gif';
 import SEO from '../components/SEO';
-
-interface PortfolioData {
-    title: string;
-    description: string;
-    thumbnail: any;
-}
-
-interface Portfolio {
-  frontmatter: PortfolioData;
-}
+import { setTimeout } from 'timers';
 
 const Index: React.FC = () => {
-  const [index, setIndex] = useState(1);
-  const [serviceIndex, setServiceIndex] = useState(1);
-  const [selectedPortfolio ,setSelectedPortfolio] = useState(0);
-  const [serviceClientX, setServiceClientX] = useState(0);
-  const [serviceOffsetX, setServiceOffsetX] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(globalThis.innerHeight);
+  const [offsetYPos, setOffsetYPos] = useState(-165);
+  const [spanIndex, setSpanIndex] = useState(1);
 
   const query = useStaticQuery(graphql`
     query {
-      allMarkdownRemark (sort: {fields: frontmatter___title, order: ASC}) {
-        nodes {
-          frontmatter {
-            title
-            description
-            thumbnail {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
-      }
       man: file(relativePath: { eq: "man.png" }) {
         childImageSharp {
           fluid(maxHeight: 650) {
@@ -83,86 +52,66 @@ const Index: React.FC = () => {
           }
         }
       }
-      design: file(relativePath: { eq: "design.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      code: file(relativePath: { eq: "code.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      music: file(relativePath: { eq: "music.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      logoBackground: file(relativePath: { eq: "logo-background.png" }) {
-        childImageSharp {
-          fluid {
-            presentationWidth,
-            presentationHeight,
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
     }
   `);
 
-  const portfolio: Portfolio[] = query.allMarkdownRemark.nodes;
+  const handleResizeWindow = useCallback(() => {
+    setWindowHeight(globalThis.innerHeight);
+  }, [windowHeight]);
 
-  const [portfolioData, setPortfolioData] = useState(portfolio[0]);
+  const handleTypingSpan = useCallback((spanIndex) => {
+  }, [])
+  globalThis.addEventListener('resize', handleResizeWindow);
 
-  useEffect(() => {
-    let index = portfolio.findIndex(data => data.frontmatter.title === portfolioData.frontmatter.title);
-    setSelectedPortfolio(index);
-  }, [portfolioData]);
+  const handleMouseOver = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>)=> {
+    const yPos = e.clientY;
 
-  const {man, nextjs, gatsby, react, node, logoBackground, design, code, music} = query;
+    const offset = (yPos/windowHeight) * 100;
 
-  const handleServiceTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    setServiceClientX(e.targetTouches[0].clientX);
+    if(yPos > windowHeight) {
+      setOffsetYPos(-50);
+    }
 
+    const result = -165 + offset;
+    setOffsetYPos(result);
   }, []);
 
-  const handleServiceTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    setServiceOffsetX(e.targetTouches[0].clientX);
-  }, [])
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const wDivision = document.getElementById('whiteDivision');
+    if(wDivision) {
+      const height = wDivision.clientHeight;
 
-  const handleServiceTouchEnd = useCallback(() => {
-    if(serviceOffsetX > serviceClientX) {
-      serviceIndex === 1? setServiceIndex(4) : setServiceIndex(serviceIndex - 1);
-    } else if(serviceOffsetX < serviceClientX) {
-      serviceIndex === 4? setServiceIndex(1) : setServiceIndex(serviceIndex + 1);
+      const scrollPos = e.currentTarget.scrollTop;
+
+      const offset = (scrollPos / height) * 100;
+
+      const result = -140 + offset;
+      setOffsetYPos(result);
     }
-  }, [serviceClientX, serviceOffsetX]);
+  }, []);
+
+  const {man, nextjs, gatsby, react, node} = query;
 
   return (
     <Layout>
       <SEO/>
       <Container>
-        <Nav index={index} setIndex={setIndex}/>
-        {index === 1 &&
-          <Home>
+        <Nav pageIndex={1}/>
+          <Home onMouseMove={(e) => handleMouseOver(e)} onScroll={(e) => handleScroll(e)}>
             <ImageMan>
               <div>
                 <Img fluid = {man.childImageSharp.fluid} draggable={false} />
               </div>
             </ImageMan>
-            <WhiteDivision>
+            <WhiteDivision offsetYPos={offsetYPos} id="whiteDivision">
               <div>
-                <h1>Designer</h1>
-                <h1>Designer</h1>
-                <h1>Designer</h1>
-                <h1>Designer</h1>
-                <Button color="var(--primary-color)" onClick={() => {setIndex(4)}}>
+                <div>
+                  <h1>Designer</h1>
+                  <h1 className="designer">Designer</h1>
+                  <h1 className="designer">Designer</h1>
+                  <h1 className="designer">Designer</h1>
+                </div>
+                <Button color="var(--primary-color)" onClick={() => { navigate('/portfolio/') }}>
                   Ver Trabalhos
                 </Button>
               </div>
@@ -184,185 +133,17 @@ const Index: React.FC = () => {
               </Stack>
               <div>
                 <h1>Programador</h1>
-                <span>FULL STACK</span>
-                <Button color= "var(--secundary-color)" onClick={() => {setIndex(4)}}>
+                <Spans index={spanIndex}>
+                  <span onAnimationEnd={() => setSpanIndex(2)}>FRONT END</span>
+                  <span onAnimationEnd={() => setSpanIndex(3)}>BACK END</span>
+                  <span onAnimationEnd={() => setSpanIndex(1)}>FULL STACK</span>
+                </Spans>
+                <Button color= "var(--secundary-color)" onClick={() => { navigate('/portfolio/') }}>
                   Ver Trabalhos
                 </Button>
               </div>
             </BlackDivision>
           </Home>
-        }
-        {index === 2 &&
-          <>
-            <About>
-              <AboutLeftDivision>
-                <div>
-                  <h1>Minha Jornada</h1>
-                  <p>
-                    Meu Nome é <strong>Israel Pires Rosa</strong>, sou músico, designer e
-                    programador. Minha história com o design e minha vida profissional começam
-                    numa pequena gráfica, onde fui procurar
-                    alguma oportunidade de emprego. Foi um grande desafio, mas eu sempre
-                    tive facilidade para aprender. Sem ter nenhuma experiência com os
-                    programas de edição, eu teria que aprender em menos de uma semana e
-                    fazer uma logo para passar no teste, consegui criar a logo que hoje é a atual da empresa e posteriormente ser
-                    contratado para ser o responsável na área de design. Após alguns meses
-                    trabalhando e ao mesmo tempo aprendendo a usar as ferramentas
-                    e os conceitos de design, decidi abrir meu próprio negócio e enfrentar um
-                    novo desafio.
-                  </p>
-                  <p>
-                  Hoje estudo programação, mais especificamente a stack Nodejs, Reactjs, e React Native, com o objetivo de fundar minha startup.
-                  </p>
-                </div>
-              </AboutLeftDivision>
-              <AboutRightDivision>
-                <ul>
-                  <li>
-                    <AboutDivisionSymbols>
-                      <AboutSymbols>
-                        <Img fluid= {design.childImageSharp.fluid} style={{display: "flex", minWidth: "36px", maxWidth: "36px"}}/>
-                      </AboutSymbols>
-                      <div>
-                        <div>
-                          <h2>Designer</h2>
-                          <p>
-                            Designer há 2 anos, com bastante experiência e credibilidade.
-                          </p>
-                        </div>
-                      </div>
-                    </AboutDivisionSymbols>
-                  </li>
-                  <li>
-                    <AboutDivisionSymbols>
-                      <AboutSymbols>
-                        <Img fluid= {code.childImageSharp.fluid} style={{display: "flex", minWidth: "42px", maxWidth: "42px"}}/>
-                      </AboutSymbols>
-                      <div>
-                        <div>
-                          <h2>Programador</h2>
-                          <p>
-                            Programador full stack, preparado para qualquer desafio.
-                          </p>
-                        </div>
-
-                      </div>
-                    </AboutDivisionSymbols>
-                  </li>
-                  <li>
-                    <AboutDivisionSymbols>
-                      <AboutSymbols>
-                        <Img fluid= {music.childImageSharp.fluid} style={{display: "flex", minWidth: "16px", maxWidth: "16px"}}/>
-                      </AboutSymbols>
-                      <div>
-                        <div>
-                          <h2>Músico</h2>
-                          <p>
-                            Músico e produtor de trilhas sonoras por hobby.
-                          </p>
-                        </div>
-                      </div>
-                    </AboutDivisionSymbols>
-                  </li>
-                </ul>
-                <div><Img fluid={logoBackground.childImageSharp.fluid} style={{display: "flex", minWidth: "650px"}}/></div>
-              </AboutRightDivision>
-            </About>
-          </>
-        }
-        {index === 3 &&
-          <>
-            <Services onTouchStart={(e) => handleServiceTouchStart(e)} onTouchMove={(e) => handleServiceTouchMove(e)} onTouchEnd={() => handleServiceTouchEnd()}>
-              <ServicesNav index={serviceIndex} setIndex={setServiceIndex}/>
-                <ServicesContent>
-                {serviceIndex === 1 &&
-                  <>
-                    <div>
-                      <img src={webDesign} alt="Web Design" style={{maxHeight: "600px"}}/>
-                    </div>
-                    <div>
-                      <div>
-                        <h1><strong>DESIGN</strong> WEB & MOBILE</h1>
-                        <p>
-                          Criação de telas de Lading Pages profissionais, sites, blogs,
-                          e-commerce e aplicativos mobile.
-                        </p>
-
-                      </div>
-                    </div>
-                  </>
-                }
-                {serviceIndex === 2 &&
-                  <>
-                    <div>
-                      <div>
-                        <h1> <strong>DESIGN</strong> GRÁFICO</h1>
-                        <p>
-                          Desenvolvimento de logos, panfletos, cartão de visita e outros.
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <img src={graphicDesign} alt="Graphic Design" style={{ maxHeight: "600px"}} />
-                    </div>
-                  </>
-                }
-                {serviceIndex === 3 &&
-                  <>
-                    <div>
-                      <img src={programmer} alt="Programmer" style={{ maxHeight: "500px"}}/>
-                    </div>
-                    <div>
-                      <div>
-                        <h1><strong>PROGRAMAÇÃO</strong> WEB & MOBILE</h1>
-                        <p>
-                          Criação de Lading Pages profissionais, sites, blogs, e-commerce e aplicativos mobile.
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                }
-                {serviceIndex === 4 &&
-                  <>
-                    <div>
-                      <div>
-                        <h1><strong>MÍDIAS SOCIAIS</strong></h1>
-                        <p>
-                          Posts criativos semanais e com descrição e pack de stories personalizados.
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <img src={socialMedia} alt="Social Media" style={{maxHeight: "600px"}}/>
-                    </div>
-                  </>
-                }
-
-              </ServicesContent>
-            </Services>
-          </>
-        }
-        {index === 4 &&
-          <>
-            <Portfolio>
-              <PortfolioImg>
-                <Img fluid={portfolioData?.frontmatter?.thumbnail?.childImageSharp.fluid}/>
-              </PortfolioImg>
-              <PortfolioOptions selected={selectedPortfolio}>
-                {
-                  portfolio.map(data => (
-                    <li key={data.frontmatter.title} onClick={() => setPortfolioData(data)}>
-                      <div>
-                        <h2 >{data.frontmatter.title}</h2>
-                        <p >{data.frontmatter.description}</p>
-                      </div>
-                    </li>
-                  ))
-                }
-              </PortfolioOptions>
-            </Portfolio>
-          </>
-        }
       </Container>
     </Layout>
   )

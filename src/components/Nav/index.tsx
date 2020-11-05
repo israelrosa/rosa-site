@@ -1,26 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { navigate } from 'gatsby';
+
 import { Container, NavList} from './styles';
 
 interface Props {
-  index: number;
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
+  pageIndex: number;
 }
 
-const Nav: React.FC<Props> = ({index, setIndex}) => {
+const Nav: React.FC<Props> = ({ pageIndex }) => {
+  const [index, setIndex] = useState(1);
 
-
-  const handleChangePage = useCallback((page) => {
-    setIndex(page);
-  }, []);
+  useEffect(() => {
+    setIndex(pageIndex);
+  }, [pageIndex]);
 
   return (
     <Container index={index}>
       <NavList index={index}>
-        <li><a onClick={() => handleChangePage(1)}>Home</a></li>
-        <li><a onClick={() => handleChangePage(2)}>Sobre Mim</a></li>
-        <li><a onClick={() => handleChangePage(3)}>Serviços</a></li>
-        <li><a onClick={() => handleChangePage(4)}>Portfólio</a></li>
+        <li><a onClick={() => navigate('/')}>Home</a></li>
+        <li><a onClick={() => navigate('/sobre/')}>Sobre Mim</a></li>
+        <li><a onClick={() => navigate('/servicos/')}>Serviços</a></li>
+        <li><a onClick={() => navigate('/portfolio/')}>Portfólio</a></li>
       </NavList>
     </Container>
   );

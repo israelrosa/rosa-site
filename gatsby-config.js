@@ -64,7 +64,7 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-exclude',
-      options: { paths: [`/pages/**.ts]`]},
+      options: { paths: [`/pages/**/**.ts]`]},
     },
     `gatsby-plugin-netlify`,
     {
