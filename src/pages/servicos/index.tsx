@@ -14,14 +14,14 @@ const services: React.FC = () => {
   const [serviceIndex, setServiceIndex] = useState(0);
   const [serviceClientX, setServiceClientX] = useState(0);
   const [serviceOffsetX, setServiceOffsetX] = useState(0);
-  const [xPos, setXPos] = useState(window.innerWidth);
+  const [xPos, setXPos] = useState(typeof window !== 'undefined' && window.innerWidth);
 
 
   const handleResizeWindow = useCallback(() => {
-    setXPos(window.innerWidth);
+    setXPos(typeof window !== 'undefined' && window.innerWidth);
   }, [])
 
-  window.addEventListener('resize', handleResizeWindow);
+  typeof window !== 'undefined' && window.addEventListener('resize', handleResizeWindow);
 
   const handleChangeIndex = useCallback((index) => {
     const carousel = document.getElementById('serviceContent');

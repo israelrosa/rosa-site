@@ -6,10 +6,9 @@ import Img from 'gatsby-image';
 import { Container, ImageMan, WhiteDivision, BlackDivision, Stack, Home, Spans } from './styles';
 import Nav from '../components/Nav';
 import SEO from '../components/SEO';
-import { setTimeout } from 'timers';
 
 const Index: React.FC = () => {
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowHeight, setWindowHeight] = useState(typeof window !== 'undefined' && window.innerHeight);
   const [offsetYPos, setOffsetYPos] = useState(-165);
   const [spanIndex, setSpanIndex] = useState(1);
 
@@ -56,12 +55,13 @@ const Index: React.FC = () => {
   `);
 
   const handleResizeWindow = useCallback(() => {
-    setWindowHeight(window.innerHeight);
+    setWindowHeight(typeof window !== 'undefined' && window.innerHeight);
   }, [windowHeight]);
 
   const handleTypingSpan = useCallback((spanIndex) => {
   }, [])
-  window.addEventListener('resize', handleResizeWindow);
+
+  typeof window !== 'undefined' && window.addEventListener('resize', handleResizeWindow);
 
   const handleMouseOver = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>)=> {
     const yPos = e.clientY;
