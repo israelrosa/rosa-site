@@ -52,7 +52,7 @@ const Layout: React.FC = ({children}) => {
         </Main>
         <SocialMedia>
           <li>
-            <a href="https://github.com/Israelpires">
+            <a href="https://github.com/israelrosa">
               <Img fixed={github.childImageSharp.fixed}/>
             </a>
           </li>
