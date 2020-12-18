@@ -57,7 +57,7 @@ const Layout: React.FC = ({children}) => {
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/israel.rpires/">
+            <a href="https://www.instagram.com/israelp.rosa/">
               <Img fixed={instagram.childImageSharp.fixed}/>
             </a>
           </li>
